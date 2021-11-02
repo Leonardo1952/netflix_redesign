@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:netflix_redesign/pages/dashboard.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class CusBottomBar extends StatefulWidget {
@@ -18,9 +19,7 @@ class _CusBottomBarState extends State<CusBottomBar> {
 
   List<Widget> _buildScreen() {
     return [
-      const Center(
-        child: Text("First Page"),
-      ),
+      const DashBoard(),
       const Center(
         child: Text("Second Page"),
       ),
