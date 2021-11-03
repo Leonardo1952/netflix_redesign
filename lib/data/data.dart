@@ -15,23 +15,23 @@ List<CategoryModel> currentUser = [
 
 List<CategoryModel> categoryList = [
   CategoryModel(
-    image: "images/hats.svg",
+    image: "assets/images/hats.svg",
     name: "Anime",
   ),
   CategoryModel(
-    image: "images/hats.svg",
+    image: "assets/images/hats.svg",
     name: "Comedy",
   ),
   CategoryModel(
-    image: "images/gun.svg",
+    image: "assets/images/gun.svg",
     name: "Action",
   ),
   CategoryModel(
-    image: "images/television.svg",
+    image: "assets/images/television.svg",
     name: "TV Show",
   ),
   CategoryModel(
-    image: "images/local_movies.svg",
+    image: "assets/images/local_movies.svg",
     name: "Movies",
   ),
 ];
@@ -53,31 +53,31 @@ List<MoviesModel> moviesList = [
   MoviesModel(
     rating: "7.2",
     title: "Ruroni Kenshin The Final",
-    image: "images/image 1.png",
+    image: "assets/images/image 1.png",
   ),
   MoviesModel(
     rating: "7.2",
     title: "Ruroni Kenshin The Final",
-    image: "images/image 1.png",
+    image: "assets/images/image 1.png",
   ),
   MoviesModel(
     rating: "6.3",
     title: "Avengers",
-    image: "images/image 3.png",
+    image: "assets/images/image 3.png",
   ),
   MoviesModel(
     rating: "8.3",
     title: "Raya The last dragon",
-    image: "images/image 2.png",
+    image: "assets/images/image 2.png",
   ),
   MoviesModel(
     rating: "6.3",
     title: "Avengers",
-    image: "images/image 3.png",
+    image: "assets/images/image 3.png",
   ),
   MoviesModel(
     rating: "8.3",
     title: "Raya The last dragon",
-    image: "images/image 2.png",
+    image: "assets/images/image 2.png",
   ),
 ];

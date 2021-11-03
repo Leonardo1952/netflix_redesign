@@ -1,11 +1,14 @@
 import 'dart:ui';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:netflix_redesign/data/data.dart';
+import 'package:netflix_redesign/pages/movie_detail.dart';
 
 late double mqHeight;
 late double mqWidgth;
@@ -19,6 +22,7 @@ class DashBoard extends StatelessWidget {
     mqWidgth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
@@ -71,7 +75,98 @@ class DashBoard extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Container(),
+                child: Column(
+                  children: [
+                    const ListTile(
+                      leading: Text(
+                        "Popular",
+                        style: TextStyle(
+                          fontStyle: FontStyle.normal,
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ),
+                    CarouselSlider(
+                      options: CarouselOptions(
+                        viewportFraction: 0.4,
+                        height: mqHeight * 0.3,
+                        initialPage: 0,
+                        scrollDirection: Axis.horizontal,
+                        scrollPhysics: const ScrollPhysics(
+                          parent: BouncingScrollPhysics(),
+                        ),
+                        enableInfiniteScroll: true,
+                        enlargeCenterPage: true,
+                      ),
+                      items: moviesList
+                          .map(
+                            (e) => GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => MovieDetail(
+                                        image: e.image,
+                                        title: e.title,
+                                        rating: e.rating),
+                                  ),
+                                );
+                              },
+                              child: Stack(
+                                alignment: Alignment.bottomRight,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.bottomRight,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(e.image),
+                                      ),
+                                    ),
+                                    child: Container(
+                                      height: mqHeight * 0.1 - 20,
+                                      width: mqWidgth,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xffffac0b),
+                                        borderRadius: BorderRadius.only(
+                                          bottomRight: Radius.circular(20.0),
+                                          topLeft: Radius.circular(20.0),
+                                        ),
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          SvgPicture.asset(
+                                            "assets/images/Star 3.svg",
+                                            height: 15,
+                                          ),
+                                          Text(
+                                            e.rating,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 11,
+                                              fontStyle: FontStyle.normal,
+                                              fontFamily: "Poppins",
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
