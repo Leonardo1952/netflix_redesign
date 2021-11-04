@@ -1,12 +1,8 @@
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:netflix_redesign/data/data.dart';
 import 'package:netflix_redesign/pages/movie_detail.dart';
 
@@ -28,9 +24,7 @@ class DashBoard extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage(
-              "assets/images/background.png",
-            ),
+            image: AssetImage("assets/images/background.png"),
           ),
         ),
         child: SafeArea(
@@ -58,18 +52,20 @@ class DashBoard extends StatelessWidget {
                       width: mqWidgth,
                       height: mqHeight * 0.1 + 20,
                       child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          reverse: true,
-                          shrinkWrap: true,
-                          itemCount: categoryList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final CategoryModel category = categoryList[index];
-                            return Category(
-                              image: category.image,
-                              name: category.name,
-                            );
-                          }),
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        reverse: true,
+                        shrinkWrap: true,
+                        itemCount: categoryList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final CategoryModel category = categoryList[index];
+
+                          return Category(
+                            image: category.image,
+                            name: category.name,
+                          );
+                        },
+                      ),
                     )
                   ],
                 ),
@@ -108,58 +104,54 @@ class DashBoard extends StatelessWidget {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => MovieDetail(
-                                        image: e.image,
-                                        title: e.title,
-                                        rating: e.rating),
+                                      title: e.title,
+                                      image: e.image,
+                                      rating: e.rating,
+                                    ),
                                   ),
                                 );
                               },
-                              child: Stack(
+                              child: Container(
                                 alignment: Alignment.bottomRight,
-                                children: [
-                                  Container(
-                                    alignment: Alignment.bottomRight,
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(e.image),
-                                      ),
-                                    ),
-                                    child: Container(
-                                      height: mqHeight * 0.1 - 20,
-                                      width: mqWidgth,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xffffac0b),
-                                        borderRadius: BorderRadius.only(
-                                          bottomRight: Radius.circular(20.0),
-                                          topLeft: Radius.circular(20.0),
-                                        ),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          SvgPicture.asset(
-                                            "assets/images/Star 3.svg",
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            e.rating,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 11,
-                                              fontStyle: FontStyle.normal,
-                                              fontFamily: "Poppins",
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                width: double.infinity,
+                                height: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(e.image),
+                                  ),
+                                ),
+                                child: Container(
+                                  height: mqHeight * 0.1 - 20,
+                                  width: mqWidgth * 0.1,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xffffac0b),
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(20.0),
+                                      topLeft: Radius.circular(20.0),
                                     ),
                                   ),
-                                ],
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      SvgPicture.asset(
+                                        "assets/images/Star 3.svg",
+                                        height: 15,
+                                      ),
+                                      Text(
+                                        e.rating,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 11,
+                                          fontStyle: FontStyle.normal,
+                                          fontFamily: "Poppins",
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           )
@@ -192,8 +184,9 @@ class Category extends StatelessWidget {
       width: mqWidgth * 0.2,
       margin: const EdgeInsets.all(7),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: const Color.fromRGBO(196, 196, 196, 0.1)),
+        borderRadius: BorderRadius.circular(20),
+        color: const Color.fromRGBO(196, 196, 196, 0.1),
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20.0),
         child: BackdropFilter(
@@ -211,11 +204,12 @@ class Category extends StatelessWidget {
               Text(
                 name,
                 style: const TextStyle(
-                    fontFamily: "Poppins",
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 12.0,
-                    color: Colors.white),
+                  fontFamily: "Poppins",
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12.0,
+                  color: Colors.white,
+                ),
               )
             ],
           ),
@@ -283,8 +277,9 @@ class MyTextField extends StatelessWidget {
       height: mqHeight * 0.1 - 20,
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-          color: const Color.fromRGBO(255, 255, 255, 0.1),
-          borderRadius: BorderRadius.circular(20.0)),
+        color: const Color.fromRGBO(255, 255, 255, 0.1),
+        borderRadius: BorderRadius.circular(20.0),
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20.0),
         child: BackdropFilter(
