@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:netflix_redesign/pages/dashboard.dart';
+
 class MovieDetail extends StatelessWidget {
   final String image;
   final String title;
@@ -80,16 +82,159 @@ class MovieDetail extends StatelessWidget {
                       fontSize: 10,
                     ),
                   ),
-                  MaterialButton(
-                    height: 60,
-                    minWidth: double.infinity,
-                    onPressed: () {},
-                    color: const Color(0xffE11D24),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: mqWidgth * 0.1),
+                    child: MaterialButton(
+                      height: 60,
+                      minWidth: double.infinity,
+                      onPressed: () {},
+                      color: const Color(0xffE11D24),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset("assets/play-arrow.svg"),
+                          const SizedBox(
+                            width: 20.0,
+                          ),
+                          const Text(
+                            "Watch Now",
+                            style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
-            )
+            ),
+            Description(
+              rating: rating,
+              title: title,
+            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class Description extends StatelessWidget {
+  final String title;
+  final String rating;
+  const Description({
+    Key? key,
+    required this.title,
+    required this.rating,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.translate(
+      offset: Offset(0, mqHeight * 0.2 - 60),
+      child: Container(
+        height: mqWidgth * 0.3,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromRGBO(19, 18, 18, 0.3),
+              Color.fromRGBO(19, 18, 18, 0),
+            ],
+          ),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 15.0,
+              sigmaY: 15.0,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  width: mqHeight * 0.2 + 10,
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontFamily: "Nexa Bold",
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const BlurContainer(
+                      child: Text(
+                        "Popukar among friend",
+                        style: TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Poppins",
+                          fontStyle: FontStyle.normal,
+                          color: Colors.white,
+                        ),
+                      ),
+                      height: false,
+                    ),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    const BlurContainer(
+                      child: Text(
+                        "16+",
+                        style: TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Poppins",
+                          fontStyle: FontStyle.normal,
+                          color: Colors.white,
+                        ),
+                      ),
+                      height: false,
+                    ),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    BlurContainer(
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            "assets/images/Star 2.svg",
+                            height: 20,
+                          ),
+                          Text(
+                            rating,
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Poppins",
+                              fontStyle: FontStyle.normal,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      height: false,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

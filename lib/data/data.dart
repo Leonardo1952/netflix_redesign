@@ -8,7 +8,7 @@ class CategoryModel {
 ///// current user data ///
 List<CategoryModel> currentUser = [
   CategoryModel(
-    image: "images/Image.png",
+    image: "assets/images/Image.png",
     name: "Michael",
   )
 ];
